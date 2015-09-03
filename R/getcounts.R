@@ -118,7 +118,8 @@ getcounts <- function(regions, bamtab, binsize=200, repFun=defaultRepFun,
         #bprof <- bamProfile(b$path, regions, binsize=binsize, shift=b$shift, mapq=b$mapq, paired.end=b$pairedend)
         #unlist(as.list(bprof))
         bcov <- bamCoverage(b$path, regions, mapq=b$mapq, paired.end="extend")
-        colMeans(do.call(cbind, as.list(bcov)))
+        #colMeans(do.call(cbind, as.list(bcov)))
+        unlist(rowMeans(do.call(rbind, as.list(bcov))))
     })
     
     if (any(duplicated(bamtab$mark))){
